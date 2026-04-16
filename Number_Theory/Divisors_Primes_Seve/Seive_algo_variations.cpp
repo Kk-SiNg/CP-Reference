@@ -11,7 +11,7 @@ vector <int> lpf(n+1, 0);
 void sieve_to_find_lpf_and_hpf_of_n(){
     vect[0] = 0, vect[1] = 0;
     lpf[0] = 0, lpf[1] = 1;
-    hpf[0] = 0, hpf[1] = 1; 
+    hpf[0] = 0, hpf[1] = 1;
     for(int i = 2; i <= n; i++){
         if(vect[i]) lpf[i] = i, hpf[i] = i;
         if(vect[i] == true){

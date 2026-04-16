@@ -68,5 +68,25 @@
         "typeinfo": "cpp",
         "valarray": "cpp"
     },
-    "idf.currentSetup": "C:\\Users\\karti\\esp\\v5.5.1\\esp-idf"
+    "idf.currentSetup": "C:\\Users\\karti\\esp\\v5.5.1\\esp-idf",
+    "explorerSort.rules": [
+        {
+            "name": "Auto-generated for **/Graphs and trees/**",
+            "pathPattern": "**/Graphs and trees/**",
+            "priorities": [
+                {
+                    "condition": "name === 'graphs_DFS_basics.cpp'",
+                    "priority": 0,
+                    "referenceFile": "Djkestra.cpp",
+                    "offset": 0
+                },
+                {
+                    "condition": "name === 'BFS.exe'",
+                    "priority": 0,
+                    "referenceFile": "BFS.cpp",
+                    "offset": 0
+                }
+            ]
+        }
+    ]
 }

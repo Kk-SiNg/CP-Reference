@@ -172,7 +172,8 @@ int max_subsets_with_all_given_char(){
     return max_count;
 }
 
-//Q6. given a string having char from A-Z find the max length of a substring with all same characters, given that you can change any k characters to any other char.
+//Q6. given a string having char from A-Z find the max length of a substring with all same characters, given that you can change
+//    any k characters to any other char.
 //M1(brute force) time:O(N^2)
 int max_substring_all_char_same(string str, int n, int k){
     int max_length = 0;
@@ -268,6 +269,77 @@ int number_of_subarrays_with_sum_equal_to_k_binary_Array(vector <int> vect, int 
     }
     return counter_k - counter_k_minus_1;
 }
+//note-> more questions on binary subarrays can be framed like:- find the number of subarrays with the sum of odd elements == k...
+
+//Q8.find the number of subarrays with exactly k distinct intigers.
+//logic:-   1. k_distinct_ele = (<= k distinct ele) - (<= k-1 distint_ele)
+//          2. we will use map to store frequencies of elements encountered till current position of "r" if number of ele in map is > size
+//             then we'll start shrinking, covering all values of r.
+
+void subarray_with_k_distinct_ele(vector <int> vect, int n, int k){
+    unordered_map <int, int> mp;
+    int l = 0, r = 0;
+    int ctr_k = 0;
+    int ctr_k_minus_1 = 0;
+    //solving for <=k ele
+    while(r < n){
+        mp[vect[r]]++;
+        while(mp.size() > k){
+            mp[vect[l]]--;
+            if(mp[vect[l]] <= 0) mp.erase(vect[l]);
+            l++;
+        }
+        ctr_k += r-l+1;
+        r++;
+    }
+    //solving for <=k-1 ele
+    r = 0, l = 0;
+    mp.clear();
+    while(r < n){
+        mp[vect[r]]++;
+        while(mp.size() > k-1){
+            mp[vect[l]]--;
+            if(mp[vect[l]] <= 0) mp.erase(vect[l]);
+            l++;
+        }
+        ctr_k_minus_1 += r-l+1;
+        r++;
+    }
+}
+
+//Q9. given a string str and another string a, find the minimum window present in str containing all characters of a in any order.
+//M1:- go through all subarrays in O(n^2) and check if current subarray has allcharacters of a via hash array of size 256 covering all char
+//M2:- two pointers and hash_map--->maintain a pre-initialised map containing all ele of a. while fix l = 0, and move until a valid
+//     substring is found(maintain a ctr to count number of ele of a covered with exact frequency) now start shrinking till ctr <= a.len
+//     repeat process till r < n
+//TC:- O(2n)
+void find_min_str_containing_window(string str, string a){
+    int n = str.length();
+    int m = a.length();
+    int l = 0, r = 0;
+    int ctr = m;
+    int starting_idx = -1, min_len = 1e7+5;
+    unordered_map <char, int> mp;
+
+    for(int i = 0; i < m; i++){
+        mp[a[i]]++;
+    }
+    while(r < n){
+        if(mp.find(str[r]) != mp.end()) mp[str[r]]--;
+        if(mp.find(str[r]) != mp.end() && mp[str[r]] >= 0) ctr++;
+
+        while(ctr == m){
+            if(mp.find(str[l]) != mp.end()) mp[str[l]]++;
+            if(mp[str[l]] > 0) {
+                min_len = r-l+1;
+                starting_idx = l;
+                ctr--;
+            }
+            l++;
+        }
+    }
+}
+
 int main(){
     int n, k, a;
     cin >> n >> k;
