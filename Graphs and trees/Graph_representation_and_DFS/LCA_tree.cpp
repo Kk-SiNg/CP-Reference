@@ -6,7 +6,7 @@ array <vector<int>, N> g;
 array <int, N> par;
 
 //Q. find the lowest common ancestor of given two nodes.
-//logic:- calculate the path from root->1st node and root->2nd node than everything in the starting till the last common node(LCA) will
+//logic:- calculate the path from root->1st node and root->2nd node than everything in the starting till the last common node will
 //        be common in both path arrays, so loop for 1st diff/last_common while comparing both the path arrays.
 
 //Finding path--->first we store parents of each vertex using dfs, then in path() function, to find the path from root to vertex(v), save

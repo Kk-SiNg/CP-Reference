@@ -9,7 +9,7 @@ const int N = 10e5;
 
 array<vector<int>, N> g;
 int vis[N];                     //all initialised to 0 by default
-int level[N];
+int level[N];                   //all initialised to 0 by default
 
 void bfs(int source){           //source node from where to start BFS
     
@@ -26,7 +26,7 @@ void bfs(int source){           //source node from where to start BFS
     while(!q.empty()){
         int current_val = q.front();
         q.pop();
-        cout << current_val << " ";             //just to print order of stuffs added in queue
+        cout << current_val << " ";             //just to print order of stuffs added/removed(same) in queue
         for(int child : g[current_val]){
             if(vis[child]){
                 continue;
@@ -36,7 +36,8 @@ void bfs(int source){           //source node from where to start BFS
             level[child] = level[current_val] + 1;
         }
     }
-    // Time complexicity = O(nodes + (2*edges)) = O(nodes + edges)      note---> while loop iterating 'nodes' times and for all v loops for loop is iterating 'edges' times.
+    // Time complexicity = O(nodes + (2*edges)) = O(nodes + edges)      note---> "while loop" iterating 'nodes' times and for all 
+    // v loops "for loop" is iterating 'edges' times.
     cout << endl;
 }
 
@@ -54,7 +55,8 @@ int main(){
     }
     bfs(1);
     for(int i = 1; i <= n; i++){
-        cout << i << " : " << level[i] << endl;         // note whenever edges have equal weight then level is the shortest path from source node(choose independently) to any other node
+        cout << i << " : " << level[i] << endl;         // note whenever edges have equal weight then level is the shortest path from 
+                                                        // source node(choose independently) to any other node
     }
 
     return 0;

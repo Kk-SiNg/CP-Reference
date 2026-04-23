@@ -5,8 +5,8 @@
 using namespace std;
 
 //logic:- 1. if we run dfs from a node then all of it's connected compoents will become visited
-//        2. so simply go through all nodes and if that node is unvisited then simply call dfs in that node and number of dfs calls is the
-//           number of connected components.
+//        2. so simply go through all nodes and if that node is unvisited then simply call dfs in that node and number of dfs calls is
+//           the number of connected components(CC's).
 
 const int N = 10e3+5;
 bool visited_array[N];
@@ -55,7 +55,7 @@ int main(){
 
     cout << count << "\n";
     for(int i = 0; i < count; i++){
-        for(auto j: list_of_all_connected_components[i]){
+        for(int j: list_of_all_connected_components[i]){
             cout << j <<" ";
         }
         cout << endl;

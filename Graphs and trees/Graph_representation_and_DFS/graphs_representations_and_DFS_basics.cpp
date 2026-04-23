@@ -9,7 +9,7 @@ int visited_array[N];
 array <vector<int>, N> g;
 
 // TC:- O(node + 2*edges)
-// recursion structure for dfs:-
+// recursion structure for:-
 void dfs_structure(int vertex){
     /** Take action on vertex after entering
      *  the vertex

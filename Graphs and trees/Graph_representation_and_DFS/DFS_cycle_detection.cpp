@@ -15,7 +15,9 @@ bool visited_lst[N];
 bool dfs(int vertex, int parent){  
     visited_lst[vertex] = 1;
     bool isCycleExist = false;              //feel that for every vertex we are checking if a cycle exist with current vertex as starting
-                                            //point, hence initialising it with false initially.
+                                            //point(i.e. we have visited rest of part of cycle and now if a child of current vertex is visited
+                                            //then start returning true while backtracking to start), hence initialising it with false
+                                            //initially.
     for(int child : graph[vertex]){         
         if(child == parent) continue;
         if(visited_lst[child]) return true; //note that as soon as a visited_non_current_parent node is found then cycle detected in the

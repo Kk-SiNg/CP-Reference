@@ -9,7 +9,7 @@ array <int, N> evens;
 //Q1. precompute the sum of every subtree of given adjacency_list
 //Q2. precompute the number of even ele present in every subtree.
 //logic:- we have to calculate sum/evens_count while backtracking from below, so when all childs are processed we start backracking.
-//        And do care that we have to add current vertex's val to the sum of subtree of that vertex
+//        And do care that we have to add current vertex's val to the sum of subtree of that vertex.
 
 void dfs(int vertex, int parent){
     // for every vertex personally
