@@ -5,8 +5,11 @@ using namespace std;
 //Q. given a directed graph find the min number of edges that needs to be reversed so that their exists atleast one path from node 1->N
 //logics:- 1. first think that while making adjacency list we'll put the given edge with weigth 0 and an edge reverse to it with penalty
 //            weight 1.
-//         2. now feel that this is a question of 0-1 BFS where we put the child with weight 0 in front of queue and child with weight 1
-//            at the back like normal BFS. And hence the shortest 0-1 BFS path(level) will be the min reversals required.
+//         2. now feel that this is a question of 0-1 BFS where we put the child with weight 0 in front of queue(treating as it is in same
+//            level as that of parent) and child with weight 1 at the back like normal BFS. And hence the shortest 0-1 BFS path(level)
+//            will be the min reversals required.
+//          3. Also feel that at a time their can be at max of 2 levels in queue, that's why we can put node with 0wt on upper level as
+//             (parent level) compared to a node attached to parent with 1 wt(to be put on next level)
 
 const int N = 1e5 +5;
 const long int INF = 1e9;
@@ -15,7 +18,7 @@ array<vector<pair<int, int>>, N> g;
 array <int, N> level = {INF};
 
 int BFS(int n){
-    deque<int> q;
+    deque<int> q;           //to push elements on front and back
     q.push_back(1);         //source = 1, goal = n
     level[1] = 0;
 
@@ -31,7 +34,7 @@ int BFS(int n){
 //regestered with a level say 2 with parent p, but while processing rest of childs of p it may happen that we get even shorter path(say
 //the direct wt between p and node is 1 but their exist 2 nodes st one is connected to p with 0 wt and then this to another node with 0 wt
 //and then this 2nd node finally to our required node with another 0 wt, hence total 0 path cost), that's why we can't use a visited array.
-//also observe that this if can be executed at max of 2*edges times cuz first we might get a 1 cost route and <then> a 0 cost route
+//also observe that this "if" can be executed at max of 2*edges times cuz first we might get a 1 cost route and <then> a 0 cost route
                 level[current_child] = level[current_node] + current_wt;
                 if(current_wt == 1){
                     q.push_back(current_child);
